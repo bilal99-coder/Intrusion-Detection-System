@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json;
+using static IntrusionDetectionSystem.PrometheusParser; 
 
-// See https://aka.ms/new-console-template for more information
-//Console.WriteLine("Hello, World!");
+
 namespace IntrusionDetectionSystem
 {
     class Program
@@ -15,11 +16,12 @@ namespace IntrusionDetectionSystem
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json")); 
             client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter"); 
 
-            var stringTask = client.GetStringAsync("https://api.github.com/orgs/dotnet/repos");
-
+            var stringTask = client.GetStringAsync("http://127.0.0.1:4000/metrics");
+           // var metrics = await JsonSerializer.DeserializeAsync<List<Metrics>>(await streamTask);
             var msg = await stringTask; 
-
-            Console.Write(msg); 
+           // Console.Write(msg); 
+            Parse(await stringTask); 
+          
         }
         static async Task Main(String[] args)
         {
