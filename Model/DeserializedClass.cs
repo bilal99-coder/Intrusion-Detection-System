@@ -7,7 +7,7 @@ namespace Model
         public string b_dstAddr { get; set; }
         public string c_dstPort { get; set; }
         public string d_firstSeen { get; set;}
-        // 
+        // //
         public string instance {get; set;}
         public string job {get; set;}
 
